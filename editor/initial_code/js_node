@@ -1,19 +1,22 @@
 "use strict";
 
-function sumTwo(a, b) {
-    // sums two passed arguments
+function isometricStrings(a, b) {
 
     // your code here
-    return 0;
+    return undefined;
 }
 
 var assert = require('assert');
 if (!global.is_checking) {
     console.log('Example:');
-    console.log(sumTwo(3, 2));
+    console.log(isometricStrings("add", "egg"));
 
     // These "asserts" are used for self-checking and not for an auto-testing
-    assert.equal(sumTwo(3, 2), 5);
-    assert.equal(sumTwo(5, 7), 12);
+    assert.equal(isometricStrings("add", "egg"), true);
+    assert.equal(isometricStrings("foo", "bar"), false);
+    assert.equal(isometricStrings("", ""), true);
+    assert.equal(isometricStrings("all", "all"), true);
+
     console.log("Coding complete? Click 'Check' to earn cool rewards!");
 }
+    

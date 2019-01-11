@@ -1,16 +1,15 @@
-def sum_two(a, b):
-    """
-        sums two passed arguments
-    """
+def isometric_strings(a, b):
     # your code here
     return None
 
 
 if __name__ == '__main__':
     print("Example:")
-    print(sum_two(3, 2))
-    
+    print(isometric_strings("add", "egg"))
+
     # These "asserts" are used for self-checking and not for an auto-testing
-    assert sum_two(3, 2) == 5, "First"
-    assert sum_two(5, 7) == 12, "Second"
+    assert isometric_strings("add", "egg") == true
+    assert isometric_strings("foo", "bar") == false
+    assert isometric_strings("", "") == true
+    assert isometric_strings("all", "all") == true
     print("Coding complete? Click 'Check' to earn cool rewards!")
