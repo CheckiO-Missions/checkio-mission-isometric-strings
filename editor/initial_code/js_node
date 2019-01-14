@@ -1,6 +1,6 @@
 "use strict";
 
-function isometricStrings(a, b) {
+function isometricStrings(str1, str2) {
 
     // your code here
     return undefined;
@@ -9,13 +9,13 @@ function isometricStrings(a, b) {
 var assert = require('assert');
 if (!global.is_checking) {
     console.log('Example:');
-    console.log(isometricStrings("add", "egg"));
+    console.log(isometricStrings('add', 'egg'));
 
     // These "asserts" are used for self-checking and not for an auto-testing
-    assert.equal(isometricStrings("add", "egg"), true);
-    assert.equal(isometricStrings("foo", "bar"), false);
-    assert.equal(isometricStrings("", ""), true);
-    assert.equal(isometricStrings("all", "all"), true);
+    assert.equal(isometricStrings('add', 'egg'), true);
+    assert.equal(isometricStrings('foo', 'bar'), false);
+    assert.equal(isometricStrings('', ''), true);
+    assert.equal(isometricStrings('all', 'all'), true);
 
     console.log("Coding complete? Click 'Check' to earn cool rewards!");
 }
