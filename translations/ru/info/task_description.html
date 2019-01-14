@@ -6,6 +6,10 @@
 
 <p>Один символ одной строки может соответствовать только одному символу другой строки. Два или более символа одной строки могут соответствовать одному символу другой строки, но не наоборот.</p>
 
+<div class="for_info_only" style="text-align: center">
+    <img src="{{MEDIA}}example.png" style="max-height: 350px">
+</div>
+
 <p>
     <strong>Input: </strong> Два аргумента. Оба строки.
 </p>
@@ -22,12 +26,12 @@
     </p>
 
 {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">isometricStrings('add', 'egg') == true
-isometricStrings('foo', 'bar') == false
+<pre class="brush: javascript">isometricStrings("add", "egg") == true
+isometricStrings("foo", "bar") == false
 </pre>
 {% else %}
-<pre class="brush: python">isometric_strings('add', 'egg') == True
-isometric_strings('foo', 'bar') == False
+<pre class="brush: python">isometric_strings("add", "egg") == true
+isometric_strings("foo", "bar") == false
 </pre>
 {% endif %}
 </div>
