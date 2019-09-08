@@ -35,6 +35,10 @@ TESTS = {
         {
             "input": ["paper", "words"],
             "answer": False
+        },
+        {
+            "input": ["hall", "hoop"],
+            "answer": False
         }
     ]
 }
