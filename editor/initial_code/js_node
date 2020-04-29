@@ -1,22 +1,19 @@
-"use strict";
+import assert from "assert";
 
-function isometricStrings(str1, str2) {
-
+function isometricStrings(line1: string, line2: string): boolean {
     // your code here
-    return undefined;
+    return false;
 }
 
-var assert = require('assert');
-if (!global.is_checking) {
-    console.log('Example:');
-    console.log(isometricStrings('add', 'egg'));
+console.log('Example:');
+console.log(isometricStrings('add', 'egg'));
 
-    // These "asserts" are used for self-checking and not for an auto-testing
-    assert.equal(isometricStrings('add', 'egg'), true);
-    assert.equal(isometricStrings('foo', 'bar'), false);
-    assert.equal(isometricStrings('', ''), true);
-    assert.equal(isometricStrings('all', 'all'), true);
+// These "asserts" are used for self-checking
+assert.equal(isometricStrings('add', 'egg'), true);
+assert.equal(isometricStrings('foo', 'bar'), false);
+assert.equal(isometricStrings('', ''), true);
+assert.equal(isometricStrings('all', 'all'), true);
+assert.equal(isometricStrings('gogopy', 'doodle'), false);
 
-    console.log("Coding complete? Click 'Check' to earn cool rewards!");
-}
+console.log("Coding complete? Click 'Check' to earn cool rewards!");
     

@@ -26,12 +26,18 @@
     </p>
 
 {% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">isometricStrings("add", "egg") == true
-isometricStrings("foo", "bar") == false
+<pre class="brush: javascript">isometricStrings('add', 'egg') == true
+isometricStrings('foo', 'bar') == false
+isometricStrings('', '') == true
+isometricStrings('all', 'all') == true
+isometricStrings('gogopy', 'doodle') == false
 </pre>
 {% else %}
-<pre class="brush: python">isometric_strings("add", "egg") == true
-isometric_strings("foo", "bar") == false
+<pre class="brush: python">isometric_strings('add', 'egg') == True
+isometric_strings('foo', 'bar') == False
+isometric_strings('', '') == True
+isometric_strings('all', 'all') == True
+isometric_strings('gogopy', 'doodle') == False
 </pre>
 {% endif %}
 </div>

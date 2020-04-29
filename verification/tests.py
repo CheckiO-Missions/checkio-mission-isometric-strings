@@ -25,7 +25,12 @@ TESTS = {
         {
             "input": ["all", "all"],
             "answer": True
-        }
+        },
+        {
+            "input": ["gogopy", "doodle"],
+            "answer": False
+        },
+
     ],
     "Extra": [
         {
