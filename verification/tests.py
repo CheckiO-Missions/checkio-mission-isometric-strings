@@ -19,6 +19,10 @@ TESTS = {
             "answer": False
         },
         {
+            "input": ["bar", "foo"],
+            "answer": True
+        },
+        {
             "input": ["", ""],
             "answer": True
         },
