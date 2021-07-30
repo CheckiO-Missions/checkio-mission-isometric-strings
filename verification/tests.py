@@ -20,7 +20,7 @@ TESTS = {
         },
         {
             "input": ["bar", "foo"],
-            "answer": True
+            "answer": False
         },
         {
             "input": ["", ""],
