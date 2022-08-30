@@ -1,0 +1,151 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Я уявлення не маю, як розв'язувати цю місію.
+    </div>
+    <div class="answer">
+        Загалом ідея у тому, що рухаютись по першому рядку і для кожного символа
+        отримувати і зберігати символ з другого рядка на тій самій позиції. Якщо
+        у якийсь момент з'явиться більше одного символа з другого рядка, що відповідають
+        одному символу з першого рядка, то це означатиме, що перший рядок не є ізометричним
+        до другого.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        З якого інструменту мені варто почати?
+    </div>
+    <div class="answer">
+        Прочитай про вбудовану функцію <a target="_blank" href="https://www.w3resource.com/python/built-in-function/enumerate.php">enumerate()</a>.
+        Вона дає тобі і символ, і його індекс у рядку. Використай цикл for для
+        ітерації по об'єкту enumerate:
+        <br />
+        <br />
+        <pre class="brush: python">
+for ind, char in enumerate(a):
+    # виконувати операції
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Я не розумію, як зберігати зв'язки між символами у рядках.
+    </div>
+    <div class="answer">
+        Тобі потрібен <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries.asp">словник</a>
+        для збереження символів з першого рядка як ключів і відповідних символів
+        з другого рядка як значень. Створи порожній словник перед ітерацією по рядку:
+        <br />
+        <br />
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = ...         
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Добре, а як наповнити цей словник елементами?
+    </div>
+    <div class="answer">
+        Я раджу тобі використати <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">множини</a>
+        як значення словника для збереження лише унікальних символів. Використай
+        метод словників <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries_access.asp">get()</a>
+        з порожньою множиною як значенням за замовчуванням. Також використай метод множин <a target="_blank" href="https://www.w3schools.com/python/ref_set_union.asp">union()</a>
+        для додавання символа з другого рядка з певним індексом до відповідної
+        множини у словнику:
+        <br />
+        <br />
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = dic.get(char, set()).union(set(b[ind]))
+        </pre>
+        Тож, для кожного унікального символа у першому рядку ти додаєш всі символи
+        з другого рядка на відповідних позиціях.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        А як мені перевірити, чи перший рядок є ізометричним до другого?
+    </div>
+    <div class="answer">
+        Функція має повертати True, коли для кожного унікального символа з першого
+        рядка є лише один відповідний символ із другого рядка. Тож після поповнення
+        множини в словнику, зроби перевірку: якщо її довжина стала більшою одиниці,
+        це не є відповідність 1-до-1:
+    <br />
+    <br />
+        <pre class="brush: python">
+if len(dic[char]) > 1:
+    return False
+        </pre>
+        Після завершення проходження першого рядка, якщо не було повернення False,
+        поверни True оскільки перший рядок є ізометричним до другого.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        То як має виглядати моє остаточне рішення?
+    </div>
+    <div class="answer">
+        Оберни весь код в вираз функції. І ось рішення:
+        <br />
+        <br />
+        <pre class="brush: python">
+def isometric_strings(a: str, b: str) -> bool:
+
+    dic = {}
+    for ind, char in enumerate(a):
+        dic[char] = dic.get(char, set()).union(set(b[ind]))
+        if len(dic[char]) > 1:
+            return False
+
+    return True
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Покажи мені більше розв'язків!<br />
+        Адже я хочу стати справжнім Python Ніндзею!
+    </div>
+    <div class="answer">
+        Звісно, тримай!<br />
+        Використай функцію zip(), щоб створити кортежі символів з двох рядків з однаковими індексами,
+        лиши унікальні кортежі з set(). Довжина цієї множини повинна бути однаковою
+        із довжиною множини першого рядка.
+        <br />
+        <br />
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    return len(set(zip(str1, str2))) == len(set(str1))
+        </pre>
+        Метод рядків str.maketrans() створює словник, де ключами є символи з першого рядка,
+        а значеннями - символи із другого. Тоді, використовуючи цей словник, перший рядок перекладається.
+        Якщо результат однаковий із другим рядком - повертається True.
+        <br />
+        <br />
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    trans = str.maketrans(str1, str2)
+    
+    return str1.translate(trans) == str2
+        </pre>
+        <br />
+        <br />
+        Тисни "Best solutions" в меню місії і побачиш багато інших цікавих розв'язків!
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Дякую! Тепер я знаю і розумію більше! Все працює як слід!
+    </div>
+    <div class="answer">
+        Приємно це чути!
+    </div>
+</div>
+</body>
