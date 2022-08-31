@@ -13,39 +13,27 @@
 </div>
 
 <p>
-    <strong>Input: </strong> Two arguments. String A and String B.
+    <strong>Input:</strong> Two arguments. String A and String B.
 </p>
 
 <p>
-    <strong>Output: </strong> Boolean.
+    <strong>Output:</strong> Boolean.
 </p>
 
 
 <!-- Put some usage examples -->
 <div class="for_info_only">
     <p>
-        <strong>Example:</strong>
+        <strong>Examples:</strong>
     </p>
 
-{% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">isometricStrings('add', 'egg') == true
-isometricStrings('foo', 'bar') == false
-isometricStrings('', '') == true
-isometricStrings('all', 'all') == true
-isometricStrings('gogopy', 'doodle') == false
-</pre>
-{% else %}
-<pre class="brush: python">isometric_strings('add', 'egg') == True
-isometric_strings('foo', 'bar') == False
-isometric_strings('', '') == True
-isometric_strings('all', 'all') == True
-isometric_strings('gogopy', 'doodle') == False
-</pre>
-{% endif %}
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <p>
     <strong>Precondition:</strong><br>
-    both strings are the same length
+    <ul>
+    <li>both strings are the same length.</li>
+    </ul>
 </p>
 
