@@ -52,6 +52,10 @@ TESTS = {
         {   
             "input": ["mama", "noon"],
             "answer": False
+        },
+        {   
+            "input": ["abba", "cccc"],
+            "answer": True
         }
     ]
 }
