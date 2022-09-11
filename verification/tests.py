@@ -34,7 +34,10 @@ TESTS = {
             "input": ["gogopy", "doodle"],
             "answer": False
         },
-
+        {   
+            "input": ["abba", "cccc"],
+            "answer": True
+        }
     ],
     "Extra": [
         {
@@ -52,10 +55,6 @@ TESTS = {
         {   
             "input": ["mama", "noon"],
             "answer": False
-        },
-        {   
-            "input": ["abba", "cccc"],
-            "answer": True
         }
     ]
 }
