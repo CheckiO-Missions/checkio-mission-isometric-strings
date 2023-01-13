@@ -1,0 +1,174 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>I have no idea how to start solving this mission.</p>
+    </div>
+    <div class="answer">
+        <p>
+            💡 The general idea is to move over the first string and for each character get and remember character from the second string on the same position. If in some moment the same character from the first string has another corresponding character from the second one, then the first string is not isometric to the second.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Ok, what should I start from?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Let's declare a variable <b class="code">dict</b> with the initial value of empty dictionary. You will store there pairs of corresponding characters.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            How to move over the first string?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            To make your further code more readable, I offer you to iterate over the indexes and characters of the first string at the same time. How to do it?
+        </p>
+        <p>
+            Let's convert first string into an array with string <a target="_blank" href="https://www.w3schools.com/jsref/jsref_split.asp">split()</a> method.
+        </p>
+        <pre class="brush: javascript">
+line1.split("")
+        </pre>
+        <p>
+            Now you can create an iterator for key/value pairs of the array, which are index/character pairs of the string with array <a target="_blank" href="https://www.w3schools.com/jsref/jsref_entries.asp">entries()</a> method.
+        </p>
+        <pre class="brush: javascript">
+line1.split("").entries()
+        </pre>
+        <p>
+            Finally, use <a target="_blank" href="https://www.w3schools.com/js/js_loop_forof.asp">for/of loop</a> to iterate over those pairs as declared <b class="code">const</b> tuple.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){...};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            What should I do next?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Inside loop for each character from the first string get the corresponding character of the second one as a new variable <b class="code">char2</b>.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){
+    let char2 = line2[ind];
+    ...
+};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            How to create a pair of corresponding characters and fill the dictionary?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Use <a target="_blank" href="https://www.w3schools.com/js/js_if_else.asp">if/else if</a> statement. The <b class="code">if</b> should check, whether current character <b class="code">char</b> from the first string is not in dictionary <b class="code">dict</b> (<b class="code">!</b> operator). If so, you should set a corresponding pair of characters as key/value pair in dictionary.
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            What if there is already a corresponding pair for the current characters from the first and second strings in the dictionary?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Let's think. If the current character <b class="code">char</b> from the first string is already present as a key in the <b class="code">dict</b>, you should check with <b class="code">else if</b>, that the stored corresponding character from the second string is not the same as current <b class="code">char2</b>. If so, the strings are not isometric and your function should return <b class="code">false</b>. 
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+else if (dict[char] != char2)
+    return false
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>So, how my final solution should look like?</p>
+    </div>
+    <div class="answer">
+        <p>
+            You just need to wrap your code into function expression and return <b class="code">true</b> after the loop. Since there were not returning <b class="code">false</b> inside loop, it means that every character from the first string has only only one corresponding character from the second string - they are isometric.
+        </p>
+        <p>Here is the whole solution:</p>
+        <pre class="brush: javascript">
+import assert from "assert";
+
+function isometricStrings(line1: string, line2: string): boolean {
+    
+    let dict = {};
+    for (const [ind, char] of line1.split("").entries()){
+        let char2 = line2[ind];
+        if (!(char in dict))
+            dict[char] = char2
+        else if (dict[char] != char2)
+            return false
+    };
+    return true
+}
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Show me more solutions!<br />
+        'Cause I wanna be a real 🥇 Javascript Hero!</p>
+    </div>
+    <div class="answer">
+        <p>Sure, grab it!</p>
+        <p>
+            This solution does the same, but looks differently. For every character and its index from the first string the dictionary pair should be set (if absent) between the characters with the same index. If the key is present in the dictionary, its value should be equal to the current character from the second string. There is also a type hint for dictionary.
+        </p>
+        <pre class="brush: javascript">
+import assert from "assert";
+
+function isometricStrings(line1: string, line2: string): boolean {
+
+    const d: {[c: string]: string} = {};
+    return [...line1].every(
+        (c, i) => (d[c] ??= line2[i]) == line2[i]
+    );
+}
+        </pre>
+        <p>
+            Here is the different approach. The length of the set of pairs of corresponding characters should be the same as the length of set of the second string. There is also an anonymous function used here.
+        </p>
+        <pre class="brush: javascript">
+var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == new Set(s).size
+        </pre>
+        <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Thanks! I know and understand more now! Everything works fine!</p>
+    </div>
+    <div class="answer">
+        👍 Glad to hear it!
+    </div>
+</div>
+</body>
