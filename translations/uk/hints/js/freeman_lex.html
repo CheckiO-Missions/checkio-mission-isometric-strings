@@ -115,9 +115,8 @@ else if (dict[char] != char2)
             Тобі просто потрібно обгорнути свій код у вираз функції та повернути <b class="code">true</b> після циклу. Оскільки не було повернення <b class="code">false</b> всередині циклу, це означає, що кожен символ з першого рядка має лише один відповідний символ з другого рядка - рядки є ізометричними.
         </p>
         <p>Ось все рішення:</p>
+        <div class="spoiler">
         <pre class="brush: javascript">
-import assert from "assert";
-
 function isometricStrings(line1: string, line2: string): boolean {
     
     let dict = {};
@@ -131,6 +130,7 @@ function isometricStrings(line1: string, line2: string): boolean {
     return true
 }
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -143,9 +143,8 @@ function isometricStrings(line1: string, line2: string): boolean {
         <p>
             Це рішення робить те саме, але виглядає інакше. Для кожного символу та його індексу з першого рядка слід встановити пару словника (якщо відсутня) між символами з однаковим індексом. Якщо ключ присутній у словнику, його значення повинно бути рівним поточному символу з другого рядка. Також є підказка типів для словника.
         </p>
+        <div class="spoiler">
         <pre class="brush: javascript">
-import assert from "assert";
-
 function isometricStrings(line1: string, line2: string): boolean {
 
     const d: {[c: string]: string} = {};
@@ -154,12 +153,15 @@ function isometricStrings(line1: string, line2: string): boolean {
     );
 }
         </pre>
+        </div>
         <p>
             Ось інший підхід. Довжина множини пар відповідних символів повинна бути такою ж, як і довжина множини символів другого рядка. Тут також використовується анонімна функція.
         </p>
+        <div class="spoiler">
         <pre class="brush: javascript">
 var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == new Set(s).size
         </pre>
+        </div>
         <p><b>Тисни "Best solutions" в меню місії та побачиш багато інших цікавих розв'язків!</b></p>
     </div>
 </div>
