@@ -37,7 +37,7 @@ TESTS = {
         {   
             "input": ["abba", "cccc"],
             "answer": True
-        }
+        },
     ],
     "Extra": [
         {
@@ -55,6 +55,6 @@ TESTS = {
         {   
             "input": ["mama", "noon"],
             "answer": False
-        }
+        },
     ]
 }

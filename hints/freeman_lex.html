@@ -1,42 +1,42 @@
 <body data-author="freeman_lex">
 <div class="question-answer">
     <div class="question">
-        I have no idea how to start solving this mission.
+        <p>
+            I have no idea how to start solving this mission.
+        </p>
     </div>
     <div class="answer">
-        The general idea is to move over the first string and for each character
-        get and remember character from the second string on the same position.
-        If in some moment there are more then one character from the second string
-        correspond to one character from the first, then the first string is not
-        isometric to the second.
+        <p>
+            💡 The general idea is to move over the first string and for each character get and remember character from the second string on the same position. If in some moment there are more then one character from the second string correspond to one character from the first, then the first string is not isometric to the second.
+        </p>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        What instrument should I start from?
+        <p>
+            What instrument should I start from?
+        </p>
     </div>
     <div class="answer">
-        Read about build-in <a target="_blank" href="https://www.w3resource.com/python/built-in-function/enumerate.php">enumerate()</a> function.
-        It gives you both character and its index in string. Use for loop to
-        iterate over this enumerate object:
-        <br />
-        <br />
+        <p>
+            Read about build-in <a target="_blank" href="https://www.w3resource.com/python/built-in-function/enumerate.php">enumerate()</a> function. It gives you both character and its index in string. Use <b class="code">for</b> loop to iterate over this <b class="code">enumerate</b> object:
+        </p>
         <pre class="brush: python">
 for ind, char in enumerate(a):
-    # do something
+    ...
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        I don't understand how to store corresponding between characters in strings.
+        <p>
+            I don't understand how to store corresponding between characters in strings.
+        </p>
     </div>
     <div class="answer">
-        You need <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries.asp">dictionary</a>
-        to store characters from the first string as keys and corresponding characters
-        from the second string as values. Create empty dictionary before iterating:
-        <br />
-        <br />
+        <p>
+            You need <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries.asp">dictionary</a> to store characters from the first string as keys and corresponding characters from the second string as values. Create empty dictionary before iterating:
+        </p>
         <pre class="brush: python">
 dic = {}
 for ind, char in enumerate(a):
@@ -46,53 +46,52 @@ for ind, char in enumerate(a):
 </div>
 <div class="question-answer">
     <div class="question">
-        Ok, how exactly to fill in this dictionary?
+        <p>
+            Ok, how exactly to fill in this dictionary?
+        </p>
     </div>
     <div class="answer">
-        I recommend you to use <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets/a>
-        as values of dictionary to store only unique characters. Use dictionary
-        <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries_access.asp">get()</a> method
-        with default value equal empty set. Also use Set <a target="_blank" href="https://www.w3schools.com/python/ref_set_union.asp">union()</a>
-        method to add character from the second string with specific index to the
-        dictionary value set:
-        <br />
-        <br />
+        <p>
+            I recommend you to use <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a> as values of dictionary to store only unique characters. Use dictionary <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries_access.asp">get()</a> method with default value equal empty set. Also use Set <a target="_blank" href="https://www.w3schools.com/python/ref_set_union.asp">union()</a> method to add character from the second string with specific index to the dictionary value set:
+        </p>
         <pre class="brush: python">
 dic = {}
 for ind, char in enumerate(a):
     dic[char] = dic.get(char, set()).union(set(b[ind]))
         </pre>
-        So, for each unique character in the first string you add all the characters
-        from the second string on the corresponding position.
+        <p>
+            So, for each unique character in the first string you add all the characters from the second string on the corresponding position.
+        </p>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        So, how to check if the first string is isometric to the second?
+        <p>So, how to check if the first string is isometric to the second?</p>
     </div>
     <div class="answer">
-        Function should return True when to each unique character from the first string there is only
-        one corresponding character from the second string. So, after updating
-        the value set in dictionary make a check: if its length become more then
-        one, then it is not 1-to-1 corresponding:
-    <br />
-    <br />
+        <p>
+            Function should return <b class="code">True</b> when to each unique character from the first string there is only one corresponding character from the second string. So, after updating the value set in dictionary make a check: if its length become more then one, then it is not 1-to-1 corresponding:
+        </p>
         <pre class="brush: python">
 if len(dic[char]) > 1:
     return False
         </pre>
-        On finishing iterating over the first string, if there were no False return,
-        return True since the first string is isometric to the second.
+        <p>
+            On finishing iterating over the first string, if there were no <b class="code">False</b> return, return <b class="code">True</b> since the first string is isometric to the second.
+        </p>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        So, how my final solution should look like?
+        <p>
+            So, how my final solution should look like?
+        </p>
+        
     </div>
     <div class="answer">
-        Wrap the whole code into function expression. Here it is:
-        <br />
-        <br />
+        <p>
+            Wrap the whole code into function expression. Here it is:
+        </p>
         <pre class="brush: python">
 def isometric_strings(a: str, b: str) -> bool:
 
@@ -108,26 +107,26 @@ def isometric_strings(a: str, b: str) -> bool:
 </div>
 <div class="question-answer">
     <div class="question">
-        Show me more solutions!<br />
-        'Cause I wanna be a real Python Ninnjaa!
+        <p>
+            Show me more solutions!<br />
+        'Cause I wanna be a real 🥇 Python Ninnjaa!
+        </p>
     </div>
     <div class="answer">
-        Sure, grab it!<br />
-        Use zip() function to create tuples of characters from two strings with
-        the same index, keep unique ones with set(). The length if this set
-        should be equal to the set of the first string.
-        <br />
-        <br />
+        <p>
+            Sure, grab it!
+        </p>
+        <p>
+            Use <b class="code">zip()</b> function to create tuples of characters from two strings with the same index, keep unique ones with <b class="code">set()</b>. The length if this set should be equal to the set of the first string.
+        </p>
         <pre class="brush: python">
 def isometric_strings(str1: str, str2: str) -> bool:
 
     return len(set(zip(str1, str2))) == len(set(str1))
         </pre>
-        String method str.maketrans() creates dictionary, where keys are characters from the first
-        string and values - from the second. Then, using this ductionary, translate
-        the first string. If the result is equal to the second string, return True.
-        <br />
-        <br />
+        <p>
+            String method <b class="code">str.maketrans()</b> creates dictionary, where keys are characters from the first string and values - from the second. Then, using this dictionary, translate the first string. If the result is equal to the second string, return <b class="code"> True</b>.
+        </p>
         <pre class="brush: python">
 def isometric_strings(str1: str, str2: str) -> bool:
 
@@ -135,18 +134,22 @@ def isometric_strings(str1: str, str2: str) -> bool:
     
     return str1.translate(trans) == str2
         </pre>
-        <br />
-        <br />
-        Click "Best solutions" at mission menu and see a lot of other
-        interesting solutions!
+        <p>
+            <b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b>
+        </p>
+        
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
-        Thanks! I know and understand more now! Everything works fine!
+        <p>
+            Thanks! I know and understand more now! Everything works fine!
+        </p>
     </div>
     <div class="answer">
-        Glad to hear it!
+        <p>
+            👍 Glad to hear it!
+        </p>
     </div>
 </div>
 </body>
