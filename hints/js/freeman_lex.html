@@ -115,9 +115,8 @@ else if (dict[char] != char2)
             You just need to wrap your code into function expression and return <b class="code">true</b> after the loop. Since there were not returning <b class="code">false</b> inside loop, it means that every character from the first string has only only one corresponding character from the second string - they are isometric.
         </p>
         <p>Here is the whole solution:</p>
+        <div class="spoiler">
         <pre class="brush: javascript">
-import assert from "assert";
-
 function isometricStrings(line1: string, line2: string): boolean {
     
     let dict = {};
@@ -131,6 +130,7 @@ function isometricStrings(line1: string, line2: string): boolean {
     return true
 }
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -143,9 +143,8 @@ function isometricStrings(line1: string, line2: string): boolean {
         <p>
             This solution does the same, but looks differently. For every character and its index from the first string the dictionary pair should be set (if absent) between the characters with the same index. If the key is present in the dictionary, its value should be equal to the current character from the second string. There is also a type hint for dictionary.
         </p>
+        <div class="spoiler">
         <pre class="brush: javascript">
-import assert from "assert";
-
 function isometricStrings(line1: string, line2: string): boolean {
 
     const d: {[c: string]: string} = {};
@@ -154,12 +153,15 @@ function isometricStrings(line1: string, line2: string): boolean {
     );
 }
         </pre>
+        </div>
         <p>
             Here is the different approach. The length of the set of pairs of corresponding characters should be the same as the length of set of the second string. There is also an anonymous function used here.
         </p>
+        <div class="spoiler">
         <pre class="brush: javascript">
 var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == new Set(s).size
         </pre>
+        </div>
         <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
     </div>
 </div>
