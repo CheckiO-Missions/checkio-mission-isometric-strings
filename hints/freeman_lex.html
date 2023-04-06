@@ -92,6 +92,7 @@ if len(dic[char]) > 1:
         <p>
             Wrap the whole code into function expression. Here it is:
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def isometric_strings(a: str, b: str) -> bool:
 
@@ -103,6 +104,7 @@ def isometric_strings(a: str, b: str) -> bool:
 
     return True
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -119,14 +121,17 @@ def isometric_strings(a: str, b: str) -> bool:
         <p>
             Use <b class="code">zip()</b> function to create tuples of characters from two strings with the same index, keep unique ones with <b class="code">set()</b>. The length if this set should be equal to the set of the first string.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def isometric_strings(str1: str, str2: str) -> bool:
 
     return len(set(zip(str1, str2))) == len(set(str1))
         </pre>
+        </div>
         <p>
             String method <b class="code">str.maketrans()</b> creates dictionary, where keys are characters from the first string and values - from the second. Then, using this dictionary, translate the first string. If the result is equal to the second string, return <b class="code"> True</b>.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def isometric_strings(str1: str, str2: str) -> bool:
 
@@ -134,6 +139,7 @@ def isometric_strings(str1: str, str2: str) -> bool:
     
     return str1.translate(trans) == str2
         </pre>
+        </div>
         <p>
             <b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b>
         </p>
