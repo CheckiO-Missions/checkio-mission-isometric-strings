@@ -1,0 +1,158 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je n'ai aucune idée de la manière de commencer à résoudre cette mission.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Attrapez une idée 💡! L'idée générale est de se déplacer sur la première chaîne et pour chaque caractère d'obtenir et de se souvenir du caractère de la deuxième chaîne sur la même position. Si à un moment donné il y a plus d'un caractère de la deuxième chaîne correspondant à un caractère de la première, alors la première chaîne n'est pas isométrique par rapport à la deuxième.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            De quel instrument dois-je commencer?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Consultez la fonction intégrée <a target="_blank" href="https://www.w3resource.com/python/built-in-function/enumerate.php">enumerate()</a>. Elle vous donne à la fois le caractère et son index dans la chaîne. Utilisez la boucle <b class="code">for</b> pour itérer sur cet objet <b class="code">enumerate</b>:
+        </p>
+        <pre class="brush: python">
+for ind, char in enumerate(a):
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je ne comprends pas comment stocker la correspondance entre les caractères dans les chaînes de caractères.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Vous avez besoin de <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries.asp">dictionary</a> pour stocker les caractères de la première chaîne en tant que clés et les caractères correspondants de la deuxième chaîne en tant que valeurs. Créez un dictionnaire vide avant d'effectuer l'itération:
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = ...         
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ok, comment remplir exactement ce dictionnaire?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Je vous recommande d'utiliser <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a> comme valeurs du dictionnaire pour ne stocker que des caractères uniques. Utilisez la méthode dictionnaire <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries_access.asp">get()</a> avec une valeur par défaut égale à l'ensemble vide. Utilisez également la méthode Set <a target="_blank" href="https://www.w3schools.com/python/ref_set_union.asp">union()</a> pour ajouter le caractère de la deuxième chaîne avec un index spécifique à l'ensemble des valeurs du dictionnaire:
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = dic.get(char, set()).union(set(b[ind]))
+        </pre>
+        <p>
+            Ainsi, pour chaque caractère unique de la première chaîne, vous ajoutez tous les caractères de la deuxième chaîne à la position correspondante.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Comment vérifier si la première chaîne est isométrique par rapport à la seconde?</p>
+    </div>
+    <div class="answer">
+        <p>
+            La fonction doit renvoyer <b class="code">True</b> si, pour chaque caractère unique de la première chaîne, il n'y a qu'un seul caractère correspondant dans la deuxième chaîne. Ainsi, après avoir mis à jour la valeur définie dans le dictionnaire, vérifiez que si sa longueur est supérieure à un, il ne s'agit pas d'une correspondance 1 à 1:
+        </p>
+        <pre class="brush: python">
+if len(dic[char])> 1:
+    return False
+        </pre>
+        <p>
+            A la fin de l'itération sur la première chaîne, s'il n'y a pas eu de retour <b class="code">False</b>, retour <b class="code">True</b> puisque la première chaîne est isométrique à la seconde.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Alors, à quoi devrait ressembler ma solution finale?
+        </p>
+        
+    </div>
+    <div class="answer">
+        <p>
+            Enveloppez tout le code dans une expression de fonction. Le voici:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(a: str, b: str) -> bool:
+
+    dic = {}
+    for ind, char in enumerate(a):
+        dic[char] = dic.get(char, set()).union(set(b[ind]))
+        if len(dic[char])> 1:
+            return False
+
+    return True
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Montrez-moi d'autres solutions!<br />
+        parce que je veux être une vraie 🥇 Python Ninnjaa!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Bien sûr, prenez-le!
+        </p>
+        <p>
+            Utilisez la fonction <b class="code">zip()</b> pour créer des tuples de caractères à partir de deux chaînes de caractères ayant le même index, conservez les caractères uniques avec <b class="code">set()</b>. La longueur de cet ensemble doit être égale à l'ensemble de la première chaîne.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    return len(set(zip(str1, str2))) == len(set(str1))
+        </pre>
+        </div>
+        <p>
+            La méthode string <b class="code">str.maketrans()</b> crée un dictionnaire dont les clés sont les caractères de la première chaîne et les valeurs ceux de la seconde. Ensuite, à l'aide de ce dictionnaire, traduisez la première chaîne. Si le résultat est égal à la deuxième chaîne, vous renvoyez <b class="code"> True</b>.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    trans = str.maketrans(str1, str2)
+    
+    return str1.translate(trans) == str2
+        </pre>
+        </div>
+        <p>Cliquez sur <b>Best Solutions</b> dans le menu mission et découvrez de nombreuses autres solutions intéressantes!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Merci beaucoup! Je comprends mieux maintenant! Tout fonctionne bien!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Heureux de l'apprendre 👍!
+        </p>
+    </div>
+</div>
+</body>

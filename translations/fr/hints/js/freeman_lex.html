@@ -1,0 +1,176 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>Je n'ai aucune idée de la manière de commencer à résoudre cette mission.</p>
+    </div>
+    <div class="answer">
+        <p>
+            Attrapez une idée 💡! L'idée générale est de se déplacer sur la première chaîne et pour chaque caractère d'obtenir et de se souvenir du caractère de la deuxième chaîne sur la même position. Si, à un moment donné, le même caractère de la première chaîne a un autre caractère correspondant de la deuxième chaîne, alors la première chaîne n'est pas isométrique par rapport à la deuxième.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Ok, par quoi dois-je commencer?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Déclarons une variable <b class="code">dict</b> avec la valeur initiale d'un dictionnaire vide. Vous y stockerez les paires de caractères correspondants.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Comment passer sur la première chaîne de caractères?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Pour rendre votre code plus lisible, je vous propose d'itérer sur les index et les caractères de la première chaîne en même temps. Comment faire?
+        </p>
+        <p>
+            Convertissons la première chaîne en un tableau avec la méthode string <a target="_blank" href="https://www.w3schools.com/jsref/jsref_split.asp">split()</a>.
+        </p>
+        <pre class="brush: javascript">
+line1.split("")
+        </pre>
+        <p>
+            Vous pouvez maintenant créer un itérateur pour les paires clé/valeur du tableau, qui sont des paires index/caractères de la chaîne avec la méthode array <a target="_blank" href="https://www.w3schools.com/jsref/jsref_entries.asp">entries()</a>.
+        </p>
+        <pre class="brush: javascript">
+line1.split("").entries()
+        </pre>
+        <p>
+            Enfin, utilisez <a target="_blank" href="https://www.w3schools.com/js/js_loop_forof.asp">for/of loop</a> pour itérer sur ces paires en tant que tuple déclaré <b class="code">const</b>.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){...};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Que dois-je faire ensuite?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            A l'intérieur de la boucle, pour chaque caractère de la première chaîne, obtenez le caractère correspondant de la seconde dans une nouvelle variable <b class="code">char2</b>.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){
+    let char2 = line2[ind];
+    ...
+};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Comment créer une paire de caractères correspondants et remplir le dictionnaire?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Utilisez l'instruction <a target="_blank" href="https://www.w3schools.com/js/js_if_else.asp">if/else if</a>. L'instruction <b class="code">if</b> doit vérifier si le caractère actuel <b class="code">char</b> de la première chaîne ne se trouve pas dans le dictionnaire <b class="code">dict</b> (opérateur<b class="code">!</b> ). Si c'est le cas, vous devez définir une paire de caractères correspondante en tant que paire clé/valeur dans le dictionnaire.
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Que se passe-t-il s'il existe déjà une paire correspondante pour les caractères actuels de la première et de la deuxième chaîne dans le dictionnaire?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Réfléchissons. Si le caractère courant <b class="code">char</b> de la première chaîne est déjà présent en tant que clé dans le dictionnaire <b class="code">dict</b>, vous devez vérifier avec <b class="code">else if</b>, que le caractère correspondant stocké de la deuxième chaîne n'est pas le même que le caractère courant <b class="code">char2</b>. Si c'est le cas, les chaînes ne sont pas isométriques et votre fonction doit renvoyer <b class="code">false</b>. 
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+else if (dict[char]!= char2)
+    return false
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Alors, à quoi devrait ressembler ma solution finale?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Il vous suffit d'envelopper votre code dans une expression de fonction et de renvoyer <b class="code">true</b> après la boucle. Puisqu'il n'y a pas eu de retour de <b class="code">false</b> à l'intérieur de la boucle, cela signifie que chaque caractère de la première chaîne n'a qu'un seul caractère correspondant dans la deuxième chaîne - elles sont isométriques.
+        </p>
+        <p>Voici la solution complète:</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isometricStrings(line1: string, line2: string): boolean {
+    
+    let dict = {};
+    for (const [ind, char] of line1.split("").entries()){
+        let char2 = line2[ind];
+        if (!(char in dict))
+            dict[char] = char2
+        else if (dict[char]!= char2)
+            return false
+    };
+    return true
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Montrez-moi d'autres solutions!<br />
+        parce que je veux être un vrai 🥇 Javascript Hero!</p>
+    </div>
+    <div class="answer">
+        <p>Bien sûr, saisissez-le!</p>
+        <p>
+            Cette solution fait la même chose, mais se présente différemment. Pour chaque caractère et son index à partir de la première chaîne, la paire du dictionnaire doit être définie (si elle est absente) entre les caractères avec le même index. Si la clé est présente dans le dictionnaire, sa valeur doit être égale au caractère courant de la deuxième chaîne. Il existe également une indication de type pour le dictionnaire.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isometricStrings(line1: string, line2: string): boolean {
+
+    const d: {[c: string]: string} = {};
+    return [...line1].every(
+        (c, i) => (d[c]??= line2[i]) == line2[i]
+    );
+}
+        </pre>
+        </div>
+        <p>
+            Voici une approche différente. La longueur de l'ensemble des paires de caractères correspondants doit être la même que la longueur de l'ensemble de la deuxième chaîne. Une fonction anonyme est également utilisée ici.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == new Set(s).size
+        </pre>
+        </div>
+        <p>Cliquez sur <b>Best Solutions</b> dans le menu mission et découvrez de nombreuses autres solutions intéressantes!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Merci beaucoup! Je sais et je comprends mieux maintenant! Tout fonctionne bien!</p>
+    </div>
+    <div class="answer">
+        Heureux de l'apprendre 👍!
+    </div>
+</div>
+</body>
