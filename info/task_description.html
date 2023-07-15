@@ -2,22 +2,22 @@
 
 <p><i>Maybe it's a cipher? Maybe, but we don’t know for sure.</i></p>
 
-<p><i>Maybe you can call it <a href="https://en.wikipedia.org/wiki/String_operations#String_homomorphism">"homomorphism"</a>? I wish I knew this word before.</i></p>
+<p><i>Maybe you can call it <a target="_blank" href="https://en.wikipedia.org/wiki/String_operations#String_homomorphism">"homomorphism"</a>? I wish I knew this word before.</i></p>
 
-<p>You need to check that the String A is isometric to the String B. There exists a function that turns characters from String A into characters in the same spot in String B.</p>
+<p>You need to check that the string A is isometric to the string B. There exists a function that turns characters from A into characters in the same spot in B.</p>
 
-<p>Characters in String A correspond to a unique character value in String B. Characters in String B are allowed to correspond to multiple character values in String A.</p>
+<p>Characters in A correspond to a unique character value in B. Characters in B are allowed to correspond to multiple character values in A.</p>
 
 <div class="for_info_only" style="text-align: center">
     <img src="{{MEDIA}}example.png" style="max-height: 350px">
 </div>
 
 <p>
-    <strong>Input:</strong> Two arguments. String A and String B.
+    <strong>Input:</strong> Two strings <span translate="no">(str{% if is_js %}ing{% endif %})</span>.
 </p>
 
 <p>
-    <strong>Output:</strong> Boolean.
+    <strong>Output:</strong> Logic value <span translate="no">(bool{% if is_js %}ean{% endif %})</span>.
 </p>
 
 
@@ -33,7 +33,7 @@
 <p>
     <strong>Precondition:</strong><br>
     <ul>
-    <li>both strings are the same length.</li>
+    <li>both strings have the same length.</li>
     </ul>
 </p>
 

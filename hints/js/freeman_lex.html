@@ -5,7 +5,7 @@
     </div>
     <div class="answer">
         <p>
-            💡 The general idea is to move over the first string and for each character get and remember character from the second string on the same position. If in some moment the same character from the first string has another corresponding character from the second one, then the first string is not isometric to the second.
+            Catch an idea 💡! The general idea is to move over the first string and for each character get and remember character from the second string on the same position. If in some moment the same character from the first string has another corresponding character from the second one, then the first string is not isometric to the second.
         </p>
     </div>
 </div>
@@ -155,14 +155,14 @@ function isometricStrings(line1: string, line2: string): boolean {
         </pre>
         </div>
         <p>
-            Here is the different approach. The length of the set of pairs of corresponding characters should be the same as the length of set of the second string. There is also an anonymous function used here.
+            Here is a different approach. The length of the set of pairs of corresponding characters should be the same as the length of set of the second string. There is also an anonymous function used here.
         </p>
         <div class="spoiler">
         <pre class="brush: javascript">
 var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == new Set(s).size
         </pre>
         </div>
-        <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
+        <p>Click <b>Best Solutions</b> at mission menu and see a lot of other interesting solutions!</p>
     </div>
 </div>
 <div class="question-answer">
@@ -170,7 +170,7 @@ var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == ne
         <p>Thanks! I know and understand more now! Everything works fine!</p>
     </div>
     <div class="answer">
-        👍 Glad to hear it!
+        Glad to hear it 👍!
     </div>
 </div>
 </body>
