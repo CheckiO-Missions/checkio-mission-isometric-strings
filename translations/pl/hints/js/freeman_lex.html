@@ -1,0 +1,176 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>Nie mam pojęcia, jak zacząć rozwiązywać tę misję.</p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę złapać jakiś pomysł 💡! Generalnie chodzi o to, aby przejść przez pierwszy ciąg i dla każdego znaku pobrać i zapamiętać znak z drugiego ciągu na tej samej pozycji. Jeśli w pewnym momencie ten sam znak z pierwszego ciągu ma inny odpowiadający mu znak z drugiego ciągu, to pierwszy ciąg nie jest izometryczny względem drugiego.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Ok, od czego powinienem zacząć?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę zadeklarować zmienną <b class="code">dict</b> z wartością początkową pustego słownika. Będzie Pan tam przechowywał pary odpowiadających sobie znaków.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak przejść do pierwszego ciągu?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Aby uczynić dalszy kod bardziej czytelnym, proponuję iterować po indeksach i znakach pierwszego ciągu jednocześnie. Jak to zrobić?
+        </p>
+        <p>
+            Przekształćmy pierwszy ciąg w tablicę za pomocą metody string <a target="_blank" href="https://www.w3schools.com/jsref/jsref_split.asp">split()</a>.
+        </p>
+        <pre class="brush: javascript">
+line1.split("")
+        </pre>
+        <p>
+            Teraz można utworzyć iterator dla par klucz/wartość tablicy, które są parami indeks/znak łańcucha za pomocą metody array <a target="_blank" href="https://www.w3schools.com/jsref/jsref_entries.asp">entries()</a>.
+        </p>
+        <pre class="brush: javascript">
+line1.split("").entries()
+        </pre>
+        <p>
+            Na koniec proszę użyć <a target="_blank" href="https://www.w3schools.com/js/js_loop_forof.asp">for/of loop</a>, aby iterować po tych parach jako zadeklarowana <b class="code">const</b> krotka.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){...};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Co powinienem zrobić dalej?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Wewnątrz pętli dla każdego znaku z pierwszego ciągu proszę pobrać odpowiadający mu znak z drugiego ciągu jako nową zmienną <b class="code">char2</b>.
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){
+    let char2 = line2[ind];
+    ...
+};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak utworzyć parę odpowiadających sobie znaków i wypełnić słownik?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę użyć instrukcji <a target="_blank" href="https://www.w3schools.com/js/js_if_else.asp">if/else if</a>. Instrukcja <b class="code">if</b> powinna sprawdzić, czy bieżący znak <b class="code">char</b> z pierwszego ciągu nie znajduje się w słowniku <b class="code">dict</b> (operator<b class="code">!</b> ). Jeśli tak, należy ustawić odpowiednią parę znaków jako parę klucz/wartość w słowniku.
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Co zrobić, jeśli w słowniku istnieje już odpowiednia para dla bieżących znaków z pierwszego i drugiego ciągu?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę się zastanowić. Jeśli bieżący znak <b class="code">char</b> z pierwszego ciągu jest już obecny jako klucz w <b class="code">dict</b>, należy sprawdzić za pomocą <b class="code">else if</b>, czy zapisany odpowiedni znak z drugiego ciągu nie jest taki sam jak bieżący <b class="code">char2</b>. Jeśli tak, ciągi nie są izometryczne, a Pana funkcja powinna zwrócić <b class="code">false</b>. 
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+else if (dict[char]!= char2)
+    return false
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Jak więc powinno wyglądać moje ostateczne rozwiązanie?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Musi Pan po prostu zawinąć swój kod w wyrażenie funkcji i zwrócić <b class="code">true</b> po pętli. Ponieważ nie zwrócono <b class="code">false</b> wewnątrz pętli, oznacza to, że każdy znak z pierwszego ciągu ma tylko jeden odpowiadający mu znak z drugiego ciągu - są one izometryczne.
+        </p>
+        <p>Oto całe rozwiązanie:</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isometricStrings(line1: string, line2: string): boolean {
+    
+    let dict = {};
+    for (const [ind, char] of line1.split("").entries()){
+        let char2 = line2[ind];
+        if (!(char in dict))
+            dict[char] = char2
+        else if (dict[char]!= char2)
+            return false
+    };
+    return true
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Proszę pokazać mi więcej rozwiązań!<br />
+        bo chcę być prawdziwym 🥇 bohaterem Javascript!</p>
+    </div>
+    <div class="answer">
+        <p>Jasne, proszę łapać!</p>
+        <p>
+            To rozwiązanie robi to samo, ale wygląda inaczej. Dla każdego znaku i jego indeksu z pierwszego ciągu należy ustawić parę słownikową (jeśli jej nie ma) między znakami o tym samym indeksie. Jeśli klucz jest obecny w słowniku, jego wartość powinna być równa bieżącemu znakowi z drugiego ciągu. Istnieje również podpowiedź typu dla słownika.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isometricStrings(line1: string, line2: string): boolean {
+
+    const d: {[c: string]: string} = {};
+    return [...line1].every(
+        (c, i) => (d[c]??= line2[i]) == line2[i]
+    );
+}
+        </pre>
+        </div>
+        <p>
+            Oto inne podejście. Długość zbioru par odpowiadających sobie znaków powinna być taka sama jak długość zbioru drugiego ciągu znaków. Jest tu również użyta anonimowa funkcja.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == new Set(s).size
+        </pre>
+        </div>
+        <p>Proszę kliknąć <b>Best Solutions</b> w menu misji i zobaczyć wiele innych ciekawych rozwiązań!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!</p>
+    </div>
+    <div class="answer">
+        Miło mi to słyszeć 👍!
+    </div>
+</div>
+</body>
