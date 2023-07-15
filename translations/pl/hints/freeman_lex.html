@@ -1,0 +1,158 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie mam pojęcia, jak zacząć rozwiązywać tę misję.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę złapać jakiś pomysł 💡! Generalnie chodzi o to, aby przejść przez pierwszy ciąg i dla każdego znaku pobrać i zapamiętać znak z drugiego ciągu na tej samej pozycji. Jeśli w pewnym momencie więcej niż jeden znak z drugiego ciągu odpowiada jednemu znakowi z pierwszego, to pierwszy ciąg nie jest izometryczny z drugim.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Od jakiego instrumentu powinienem zacząć?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę zapoznać się z wbudowaną funkcją <a target="_blank" href="https://www.w3resource.com/python/built-in-function/enumerate.php">enumerate()</a>. Podaje ona zarówno znak, jak i jego indeks w ciągu znaków. Proszę użyć pętli <b class="code">for</b> do iteracji po tym obiekcie <b class="code">enumerate</b>:
+        </p>
+        <pre class="brush: python">
+for ind, char in enumerate(a):
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie rozumiem, jak przechowywać odpowiadające sobie znaki w łańcuchach.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Potrzebuje Pan <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries.asp">dictionary</a> do przechowywania znaków z pierwszego ciągu jako kluczy i odpowiadających im znaków z drugiego ciągu jako wartości. Proszę utworzyć pusty słownik przed iteracją:
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = ...         
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ok, jak dokładnie wypełnić ten słownik?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Zalecam użycie <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a> jako wartości słownika, aby przechowywać tylko unikalne znaki. Proszę użyć metody dictionary <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries_access.asp">get()</a> z wartością domyślną równą empty set. Proszę również użyć metody Set <a target="_blank" href="https://www.w3schools.com/python/ref_set_union.asp">union()</a>, aby dodać znak z drugiego ciągu o określonym indeksie do zestawu wartości słownika:
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = dic.get(char, set()).union(set(b[ind]))
+        </pre>
+        <p>
+            W ten sposób dla każdego unikalnego znaku w pierwszym ciągu doda Pan wszystkie znaki z drugiego ciągu na odpowiedniej pozycji.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Jak więc sprawdzić, czy pierwszy ciąg jest izometryczny względem drugiego?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Funkcja powinna zwrócić <b class="code">True</b>, jeśli dla każdego unikalnego znaku z pierwszego ciągu istnieje tylko jeden odpowiadający mu znak z drugiego ciągu. Proszę więc po zaktualizowaniu wartości w słowniku sprawdzić, czy jeśli jego długość jest większa niż jeden, to czy nie odpowiada on 1 do 1:
+        </p>
+        <pre class="brush: python">
+if len(dic[char])> 1:
+    return False
+        </pre>
+        <p>
+            Po zakończeniu iteracji nad pierwszym ciągiem, jeśli nie było <b class="code">False</b> powrót, powrót <b class="code">True</b> ponieważ pierwszy ciąg jest izometryczny do drugiego.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak więc powinno wyglądać moje ostateczne rozwiązanie?
+        </p>
+        
+    </div>
+    <div class="answer">
+        <p>
+            Proszę opakować cały kod w wyrażenie funkcyjne. Proszę bardzo:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(a: str, b: str) -> bool:
+
+    dic = {}
+    for ind, char in enumerate(a):
+        dic[char] = dic.get(char, set()).union(set(b[ind]))
+        if len(dic[char])> 1:
+            return False
+
+    return True
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę pokazać mi więcej rozwiązań!<br />
+        bo chcę być prawdziwym 🥇 Python Ninnjaa!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Jasne, proszę łapać!
+        </p>
+        <p>
+            Proszę użyć funkcji <b class="code">zip()</b>, aby utworzyć krotki znaków z dwóch ciągów o tym samym indeksie, zachowując unikalne z <b class="code">set()</b>. Długość tego zbioru powinna być równa długości pierwszego ciągu.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    return len(set(zip(str1, str2))) == len(set(str1))
+        </pre>
+        </div>
+        <p>
+            Metoda String <b class="code">str.maketrans()</b> tworzy słownik, w którym kluczami są znaki z pierwszego łańcucha, a wartościami - z drugiego. Następnie za pomocą tego słownika proszę przetłumaczyć pierwszy ciąg znaków. Jeśli wynik jest równy drugiemu ciągowi, proszę zwrócić <b class="code"> True</b>.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    trans = str.maketrans(str1, str2)
+    
+    return str1.translate(trans) == str2
+        </pre>
+        </div>
+        <p>Proszę kliknąć <b>Best Solutions</b> w menu misji i zobaczyć wiele innych ciekawych rozwiązań!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Miło mi to słyszeć 👍!
+        </p>
+    </div>
+</div>
+</body>
