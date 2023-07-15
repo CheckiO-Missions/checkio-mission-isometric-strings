@@ -1,0 +1,176 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>我不知道如何开始解决这项任务。</p>
+    </div>
+    <div class="answer">
+        <p>
+            抓住一个想法💡！总的思路是移动第一个字符串，每个字符都从第二个字符串中得到并记住相同位置上的字符。如果在某一时刻，第一个字符串中的相同字符在第二个字符串中有另一个对应的字符，那么第一个字符串与第二个字符串不是等距的。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>好吧，我应该从哪里开始呢？</p>
+    </div>
+    <div class="answer">
+        <p>
+            让我们声明一个初始值为空字典的变量<b class="code">dict</b> 。您将在这里存储对应的字符对。
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如何移动第一个字符串？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            为了使您的代码更易读，我建议您同时遍历第一个字符串的索引和字符。如何操作？
+        </p>
+        <p>
+            让我们使用string<a target="_blank" href="https://www.w3schools.com/jsref/jsref_split.asp">split()</a> 方法将第一个字符串转换为数组。
+        </p>
+        <pre class="brush: javascript">
+line1.split("")
+        </pre>
+        <p>
+            现在可以使用数组<a target="_blank" href="https://www.w3schools.com/jsref/jsref_entries.asp">entries()</a> 方法为数组的键/值对创建迭代器，这些键/值对是字符串的索引/字符对。
+        </p>
+        <pre class="brush: javascript">
+line1.split("").entries()
+        </pre>
+        <p>
+            最后，使用<a target="_blank" href="https://www.w3schools.com/js/js_loop_forof.asp">for/of loop</a> 遍历这些对，就像声明的<b class="code">const</b> tuple 一样。
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){...};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            下一步我应该做什么？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            在循环内部，对于第一个字符串中的每个字符，获取第二个字符串中的相应字符作为一个新变量<b class="code">char2</b> 。
+        </p>
+        <pre class="brush: javascript">
+let dict = {};
+for (const [ind, char] of line1.split("").entries()){
+    let char2 = line2[ind];
+    ...
+};
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如何创建一对对应字符并填充字典？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            使用<a target="_blank" href="https://www.w3schools.com/js/js_if_else.asp">if/else if</a> 语句。<b class="code">if</b> 应检查第一个字符串中的当前字符<b class="code">char</b> 是否不在字典<b class="code">dict</b> 中（<b class="code">!</b> 操作符）。如果是，则应在字典中设置一对相应的字符作为键/值对。
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            如果第一个和第二个字符串的当前字符在字典中已经有对应的字符对，该怎么办？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            让我们想一想。如果第一个字符串中的当前字符<b class="code">char</b> 已经作为键存在于<b class="code">dict</b> 中，您应该通过<b class="code">else if</b> 检查第二个字符串中存储的对应字符是否与当前的<b class="code">char2</b> 相同。如果是，则字符串不是等距的，您的函数应该返回<b class="code">false</b> 。 
+        </p>
+        <pre class="brush: javascript">
+if (!(char in dict))
+    dict[char] = char2
+else if (dict[char]!= char2)
+    return false
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>那么，我的最终解决方案应该是怎样的呢？</p>
+    </div>
+    <div class="answer">
+        <p>
+            您只需将代码封装为函数表达式，并在循环后返回<b class="code">true</b> 。由于在循环中没有返回<b class="code">false</b> ，这意味着第一个字符串中的每个字符在第二个字符串中只有一个对应的字符--它们是等距的。
+        </p>
+        <p>下面是整个解决方案：</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isometricStrings(line1: string, line2: string): boolean {
+    
+    let dict = {};
+    for (const [ind, char] of line1.split("").entries()){
+        let char2 = line2[ind];
+        if (!(char in dict))
+            dict[char] = char2
+        else if (dict[char]!= char2)
+            return false
+    };
+    return true
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>告诉我更多的解决方案！<br />
+        因为我想成为一个真正的 🥇 Javascript 英雄！</p>
+    </div>
+    <div class="answer">
+        <p>当然，抓住它！</p>
+        <p>
+            这个解决方案做了同样的事情，但看起来不同。对于第一个字符串中的每个字符及其索引，应在具有相同索引的字符之间设置字典对（如果不存在）。如果键存在于字典中，其值应等于第二个字符串中的当前字符。字典还有一个类型提示。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isometricStrings(line1: string, line2: string): boolean {
+
+    const d: {[c: string]: string} = {};
+    return [...line1].every(
+        (c, i) => (d[c]??= line2[i]) == line2[i]
+    );
+}
+        </pre>
+        </div>
+        <p>
+            这里有一种不同的方法。对应字符对集合的长度应与第二个字符串集合的长度相同。这里还使用了一个匿名函数。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+var isometricStrings = (s, t) => new Set([...s].map((v,i) => v+t[i])).size == new Set(s).size
+        </pre>
+        </div>
+        <p>点击任务菜单<b>Best Solutions</b> ，查看更多有趣的解决方案！</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>谢谢！我现在知道并理解了更多！一切正常！</p>
+    </div>
+    <div class="answer">
+        很高兴听到这个消息👍！
+    </div>
+</div>
+</body>
