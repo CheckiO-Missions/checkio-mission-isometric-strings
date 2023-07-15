@@ -1,0 +1,158 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不知道如何开始解决这项任务。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            抓住一个想法💡！总的思路是移动第一个字符串，每个字符从第二个字符串中得到并记住相同位置上的字符。如果在某一时刻第二个字符串中的一个字符对应于第一个字符串中的一个字符，那么第一个字符串与第二个字符串不是等距的。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我应该从什么乐器开始？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            阅读内置的<a target="_blank" href="https://www.w3resource.com/python/built-in-function/enumerate.php">enumerate()</a> 函数。它给出字符及其在字符串中的索引。使用<b class="code">for</b> 循环遍历<b class="code">enumerate</b> 对象：
+        </p>
+        <pre class="brush: python">
+for ind, char in enumerate(a):
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不明白如何存储字符串中字符之间的对应关系。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            您需要<a target="_blank" href="https://www.w3schools.com/python/python_dictionaries.asp">dictionary</a> 来存储第一个字符串中的字符作为键，第二个字符串中的对应字符作为值。在迭代之前创建空字典：
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = ...         
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            好的，如何填充这个字典呢？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            我建议您使用<a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a> 作为字典的值，只存储唯一字符。使用 dictionary<a target="_blank" href="https://www.w3schools.com/python/python_dictionaries_access.asp">get()</a> 方法，默认值等于空集。同时使用 Set<a target="_blank" href="https://www.w3schools.com/python/ref_set_union.asp">union()</a> 方法将第二个字符串中的特定索引的字符添加到字典值集中：
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = dic.get(char, set()).union(set(b[ind]))
+        </pre>
+        <p>
+            因此，对于第一个字符串中的每个唯一字符，您可以将第二个字符串中的所有字符添加到相应的位置。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>那么，如何检查第一个字符串是否与第二个字符串等距？</p>
+    </div>
+    <div class="answer">
+        <p>
+            当第一个字符串中的每个唯一字符在第二个字符串中只有一个对应字符时，函数应返回<b class="code">True</b> 。因此，在更新字典中的值集之后进行检查：如果其长度大于1，则不是1-to-1对应：
+        </p>
+        <pre class="brush: python">
+if len(dic[char])> 1:
+    return False
+        </pre>
+        <p>
+            在完成对第一个字符串的迭代后，如果没有<b class="code">False</b> return，则返回<b class="code">True</b> ，因为第一个字符串与第二个字符串是等距的。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            那么，我的最终解决方案应该是怎样的呢？
+        </p>
+        
+    </div>
+    <div class="answer">
+        <p>
+            将整个代码封装为函数表达式。就是这样
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(a: str, b: str) -> bool:
+
+    dic = {}
+    for ind, char in enumerate(a):
+        dic[char] = dic.get(char, set()).union(set(b[ind]))
+        if len(dic[char])> 1:
+            return False
+
+    return True
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            告诉我更多的解决方案！<br />
+        因为我想成为一个真正的 🥇 Python Ninnjaa！
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            当然，抓住它！
+        </p>
+        <p>
+            使用<b class="code">zip()</b> 函数从两个具有相同索引的字符串中创建字符元组，使用<b class="code">set()</b> 保留唯一字符。该字符集的长度应等于第一个字符串的字符集。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    return len(set(zip(str1, str2))) == len(set(str1))
+        </pre>
+        </div>
+        <p>
+            字符串方法<b class="code">str.maketrans()</b> 创建字典，其中键是第一个字符串中的字符，值是第二个字符串中的字符。然后，使用该字典翻译第一个字符串。如果结果等于第二个字符串，返回<b class="code"> True</b> 。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    trans = str.maketrans(str1, str2)
+    
+    return str1.translate(trans) == str2
+        </pre>
+        </div>
+        <p>在任务菜单中点击<b>Best Solutions</b> ，可以看到很多其他有趣的解决方案！</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            谢谢！我现在知道并理解了更多！一切正常！
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            很高兴听到这个消息👍！
+        </p>
+    </div>
+</div>
+</body>
