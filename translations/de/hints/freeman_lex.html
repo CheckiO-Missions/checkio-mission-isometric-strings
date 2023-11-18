@@ -1,0 +1,158 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich habe keine Ahnung, wie ich mit der Lösung dieser Aufgabe beginnen soll.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Fangen Sie eine Idee 💡! Die allgemeine Idee ist, über die erste Zeichenkette zu gehen und für jedes Zeichen ein Zeichen aus der zweiten Zeichenkette an der gleichen Position zu erhalten und zu merken. Wenn zu einem bestimmten Zeitpunkt mehr als ein Zeichen aus der zweiten Zeichenkette einem Zeichen aus der ersten Zeichenkette entspricht, dann ist die erste Zeichenkette nicht isometrisch zur zweiten.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Mit welchem Instrument soll ich beginnen?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Lesen Sie die eingebaute Funktion <a target="_blank" href="https://www.w3resource.com/python/built-in-function/enumerate.php">enumerate()</a>. Sie liefert Ihnen sowohl das Zeichen als auch seinen Index in der Zeichenkette. Verwenden Sie die <b class="code">for</b> Schleife, um über dieses <b class="code">enumerate</b> Objekt zu iterieren:
+        </p>
+        <pre class="brush: python">
+for ind, char in enumerate(a):
+    ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich verstehe nicht, wie man die Entsprechungen zwischen Zeichen in Strings speichert.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Sie benötigen <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries.asp">dictionary</a>, um Zeichen aus der ersten Zeichenkette als Schlüssel und entsprechende Zeichen aus der zweiten Zeichenkette als Werte zu speichern. Erstellen Sie vor der Iteration ein leeres Wörterbuch:
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = ...         
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ok, wie genau soll dieses Wörterbuch gefüllt werden?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Ich empfehle Ihnen, <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a> als Werte des Wörterbuchs zu verwenden, um nur eindeutige Zeichen zu speichern. Verwenden Sie die Methode dictionary <a target="_blank" href="https://www.w3schools.com/python/python_dictionaries_access.asp">get()</a> mit dem Standardwert empty set. Verwenden Sie außerdem die Methode Set <a target="_blank" href="https://www.w3schools.com/python/ref_set_union.asp">union()</a>, um ein Zeichen aus der zweiten Zeichenkette mit einem bestimmten Index in die Wörterbuchwerte aufzunehmen:
+        </p>
+        <pre class="brush: python">
+dic = {}
+for ind, char in enumerate(a):
+    dic[char] = dic.get(char, set()).union(set(b[ind]))
+        </pre>
+        <p>
+            Für jedes eindeutige Zeichen in der ersten Zeichenfolge fügen Sie also alle Zeichen aus der zweiten Zeichenfolge an der entsprechenden Position hinzu.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>Wie kann man also überprüfen, ob die erste Zeichenfolge isometrisch zur zweiten ist?</p>
+    </div>
+    <div class="answer">
+        <p>
+            Die Funktion sollte <b class="code">True</b> zurückgeben, wenn zu jedem eindeutigen Zeichen aus der ersten Zeichenfolge nur ein entsprechendes Zeichen aus der zweiten Zeichenfolge vorhanden ist. Prüfen Sie also nach der Aktualisierung des Wertes im Wörterbuch: Wenn die Länge der Zeichenkette größer als eins wird, dann ist sie nicht 1-zu-1-gleich:
+        </p>
+        <pre class="brush: python">
+if len(dic[char])> 1:
+    return False
+        </pre>
+        <p>
+            Wenn die Iteration über die erste Zeichenkette abgeschlossen ist und es keine <b class="code">False</b> gibt, geben Sie <b class="code">True</b> zurück, da die erste Zeichenkette isometrisch zur zweiten ist.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Wie sollte also meine endgültige Lösung aussehen?
+        </p>
+        
+    </div>
+    <div class="answer">
+        <p>
+            Verpacken Sie den gesamten Code in einen Funktionsausdruck. Hier ist er:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(a: str, b: str) -> bool:
+
+    dic = {}
+    for ind, char in enumerate(a):
+        dic[char] = dic.get(char, set()).union(set(b[ind]))
+        if len(dic[char])> 1:
+            return False
+
+    return True
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Zeigen Sie mir mehr Lösungen!<br />
+        denn ich möchte ein echter 🥇 Python Ninnjaa sein!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Klar, schnapp sie dir!
+        </p>
+        <p>
+            Verwenden Sie die Funktion <b class="code">zip()</b>, um aus zwei Zeichenketten mit demselben Index Tupel von Zeichen zu erstellen, wobei die eindeutigen Zeichen mit <b class="code">set()</b> beibehalten werden. Die Länge dieser Menge sollte gleich der Menge der ersten Zeichenkette sein.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    return len(set(zip(str1, str2))) == len(set(str1))
+        </pre>
+        </div>
+        <p>
+            Die String-Methode <b class="code">str.maketrans()</b> erstellt ein Wörterbuch, dessen Schlüssel die Zeichen der ersten Zeichenkette und die Werte der zweiten Zeichenkette sind. Übersetzen Sie dann mithilfe dieses Wörterbuchs die erste Zeichenfolge. Wenn das Ergebnis gleich der zweiten Zeichenkette ist, geben Sie <b class="code"> True</b> zurück.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def isometric_strings(str1: str, str2: str) -> bool:
+
+    trans = str.maketrans(str1, str2)
+    
+    return str1.translate(trans) == str2
+        </pre>
+        </div>
+        <p>Klicken Sie auf <b>Best Solutions</b> im Menü Mission und sehen Sie sich viele weitere interessante Lösungen an!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Vielen Dank! Ich weiß und verstehe jetzt mehr! Alles funktioniert bestens!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Freut mich zu hören 👍!
+        </p>
+    </div>
+</div>
+</body>
